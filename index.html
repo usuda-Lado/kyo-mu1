@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7fb">
+    <title>スクールノート | 時間割と課題</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="スクールノート ホーム">
+          <span class="brand-mark">S</span>
+          <span>スクールノート<small>CLASSROOM PLANNER</small></span>
+        </a>
+        <p class="nav-label">メニュー</p>
+        <nav class="navigation" aria-label="メインメニュー">
+          <a class="nav-item active" href="#overview"><span aria-hidden="true">▦</span>今日の一覧</a>
+          <a class="nav-item" href="#schedule"><span aria-hidden="true">◷</span>時間割変更</a>
+          <a class="nav-item" href="#assignments"><span aria-hidden="true">☷</span>課題の管理</a>
+        </nav>
+        <div class="sidebar-note">
+          <span class="note-icon" aria-hidden="true">✦</span>
+          <strong>クラス運営を、すっきり。</strong>
+          <p>時間割の変更と課題の状況をひとつの場所で確認できます。</p>
+        </div>
+        <div class="sidebar-footer"><span class="online-dot"></span>この端末に保存中</div>
+      </aside>
+
+      <main class="main-content" id="overview">
+        <header class="topbar">
+          <div class="breadcrumb">クラス管理 <span>/</span> 今日の一覧</div>
+          <div class="profile"><span class="profile-avatar">先</span><span>先生</span></div>
+        </header>
+
+        <section class="welcome">
+          <div>
+            <p class="eyebrow">CLASSROOM OVERVIEW</p>
+            <h1>おつかれさまです <span aria-hidden="true">☀</span></h1>
+            <p class="welcome-caption">今日の予定と、課題の進み具合を確認しましょう。</p>
+          </div>
+          <label class="date-picker">表示する日付<input id="selected-date" type="date"></label>
+        </section>
+
+        <section class="stats" aria-label="課題の状況">
+          <article class="stat-card">
+            <span class="stat-icon purple" aria-hidden="true">◷</span>
+            <div><p>選択日の時間割変更</p><strong id="today-change-count">0</strong><span>件</span></div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon orange" aria-hidden="true">▤</span>
+            <div><p>確認中の課題</p><strong id="active-assignment-count">0</strong><span>件</span></div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon green" aria-hidden="true">✓</span>
+            <div><p>提出済み</p><strong id="submitted-count">0</strong><span>件</span></div>
+          </article>
+        </section>
+
+        <div class="content-grid">
+          <section class="panel schedule-panel" id="schedule">
+            <div class="panel-heading">
+              <div><p class="eyebrow">SCHEDULE</p><h2>時間割の変更</h2></div>
+              <button class="button button-primary" type="button" data-toggle="schedule-form">＋ 変更を追加</button>
+            </div>
+            <form class="entry-form hidden" id="schedule-form">
+              <div class="form-grid">
+                <label>日付<input name="date" type="date" required></label>
+                <label>時限<input name="period" type="number" min="1" max="12" placeholder="例：2" required></label>
+                <label>クラス<input name="className" type="text" placeholder="例：1年A組" required></label>
+                <label>変更前<input name="from" type="text" placeholder="例：数学" required></label>
+                <label>変更後<input name="to" type="text" placeholder="例：理科" required></label>
+                <label class="form-wide">連絡事項<input name="note" type="text" placeholder="教室や持ち物など（任意）"></label>
+              </div>
+              <div class="form-actions"><button class="button button-quiet" type="button" data-cancel="schedule-form">キャンセル</button><button class="button button-primary" type="submit">変更を登録</button></div>
+            </form>
+            <div class="schedule-list" id="schedule-list"></div>
+            <p class="empty-state hidden" id="schedule-empty">この日の時間割変更はありません。</p>
+          </section>
+
+          <section class="panel assignment-panel" id="assignments">
+            <div class="panel-heading">
+              <div><p class="eyebrow">ASSIGNMENTS</p><h2>課題の監督</h2></div>
+              <button class="button button-primary" type="button" data-toggle="assignment-form">＋ 課題を追加</button>
+            </div>
+            <form class="entry-form hidden" id="assignment-form">
+              <div class="form-grid">
+                <label>課題名<input name="title" type="text" placeholder="例：ワーク p.10〜12" required></label>
+                <label>教科<input name="subject" type="text" placeholder="例：数学" required></label>
+                <label>クラス<input name="className" type="text" placeholder="例：1年A組" required></label>
+                <label>提出期限<input name="dueDate" type="date" required></label>
+              </div>
+              <div class="form-actions"><button class="button button-quiet" type="button" data-cancel="assignment-form">キャンセル</button><button class="button button-primary" type="submit">課題を登録</button></div>
+            </form>
+            <div class="assignment-list" id="assignment-list"></div>
+            <p class="empty-state hidden" id="assignment-empty">課題はまだありません。課題を追加して管理を始めましょう。</p>
+          </section>
+        </div>
+        <p class="save-notice" id="save-notice" role="status" aria-live="polite"></p>
+      </main>
+    </div>
+  </body>
+</html>
